@@ -1,0 +1,15 @@
+.toDolistBox {
+  width: 500px;
+  margin: auto;
+  margin-top: 10px;
+  color: white;
+  .card {
+    background-color: transparent !important;
+  }
+}
+.done {
+  background: linear-gradient(to right, #11998e, #38ef7d) !important;
+}
+.pending {
+  background: linear-gradient(to right, #eb5757, #000000) !important;
+}
