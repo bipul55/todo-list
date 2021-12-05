@@ -120,23 +120,3 @@ app.all("*", (req, res) => {
 const server = app.listen(process.env.PORT || 9000, () => {
   console.log("server started");
 });
-
-const io = socket(server);
-
-io.on("connection", (socket) => {
-  console.log("connected  user", socket.id);
-
-  // when an user sends message
-  socket.on("msgSend", async (data) => {
-    console.log("data", data);
-    var message = new Message({
-      email: data.email,
-      name: data.name,
-      message: data.message,
-    });
-    message.save().then((m) => {
-      socket.broadcast.emit("messageReceived", m);
-      socket.emit("messageSent", m);
-    });
-  });
-});
