@@ -110,6 +110,9 @@ app.get("/login", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
+app.get("/to-do/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+});
 
 app.all("*", (req, res) => {
   res.status(200).send("Hey dont put random urls");
