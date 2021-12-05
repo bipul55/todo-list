@@ -2,8 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
-const socket = require("socket.io");
-const Message = require("./Message");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const { Login } = require("./Rest/Login");
