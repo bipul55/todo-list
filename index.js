@@ -9,7 +9,7 @@ const { Register } = require("./Rest/Register");
 const { NewList } = require("./Rest/NewList");
 const { AddNewToDo } = require("./Rest/AddNewToDo");
 const { changeToDoToDone } = require("./Rest/ChangeToDoToDone");
-const { changeToDoToPending } = require("./Rest/ChangeToDoToPending");
+const { changeToDoToPending } = require("./Rest/changeToDoToPending");
 
 const User = require("./Database/Users");
 const Lists = require("./Database/Lists");
