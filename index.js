@@ -82,7 +82,6 @@ app.post("/changeToDoToDone", async (req, res) => {
 });
 // API to change to done todo to pending
 app.post("/changeToDoToPending", async (req, res) => {
-  console.log(req.body);
   changeToDoToPending(req, res).then((data) => {
     res.json(data);
   });

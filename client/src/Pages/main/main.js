@@ -8,6 +8,7 @@ import ListBox from "../../Components/listBox/listBox";
 import { getAllTheLists } from "../../Api/getAllTheList";
 const Main = () => {
   const [lists, setLists] = useState([]);
+  const [showAddList, setShowAddList] = useState(false);
   let navigate = useNavigate();
   const [user, setUser] = useContext(LogedUser);
   const logout = async () => {
@@ -27,7 +28,7 @@ const Main = () => {
   }, [user]);
   return (
     <div>
-      <div>{user.name}</div>
+      <h1>{user.name}</h1>
       <div
         className="btn btn-dark btn-lg"
         onClick={logout}
@@ -41,21 +42,50 @@ const Main = () => {
       </div>
       <AddList
         set_list={(list) => {
+          console.log(list);
           var temp = lists;
           temp.push(list);
           setLists([...temp]);
+          setShowAddList(false);
         }}
+        show={showAddList}
+        onHide={() => setShowAddList(false)}
       />
       <br />
       <br />
-      <div className="row">
-        {lists.map((list, index) => {
-          return (
-            <div className="col-lg-4" key={index}>
-              <ListBox data={list} />
-            </div>
-          );
-        })}
+      <div
+        className="btn btn-primary"
+        onClick={() => {
+          setShowAddList(true);
+        }}
+      >
+        ADD New List
+      </div>
+      <div
+        style={{
+          width: "50%",
+          margin: "auto",
+        }}
+      >
+        {lists.length > 0 ? (
+          <div>
+            {lists.map((list, index) => {
+              return (
+                <div key={index}>
+                  <ListBox data={list} />
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <h6
+            style={{
+              marginTop: "50px",
+            }}
+          >
+            No lists
+          </h6>
+        )}
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ const Register = (req, res) => {
         password: hashedPassword,
       });
       user.save().then((u) => {
-        sendMail_register(u.email, u._id);
+        // sendMail_register(u.email, u._id);
         resolve({ registered: true });
       });
     }

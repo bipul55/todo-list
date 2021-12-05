@@ -2,6 +2,7 @@ import react, { useState, useContext } from "react";
 import "./addToDoList.scss";
 import { addNewList } from "../../Api/addNewList";
 import { LogedUser } from "../../App";
+import { Modal, Button } from "react-bootstrap";
 
 const AddList = (props) => {
   const [topic, setTopic] = useState("");
@@ -33,21 +34,47 @@ const AddList = (props) => {
       });
   };
   return (
-    <div className="addToDoList">
-      <form onChange={change_data}>
-        Topic:{" "}
-        <input type="text" id="topic" className="form-control" value={topic} />
-        Description:{" "}
-        <input
-          type="text"
-          id="description"
-          className="form-control"
-          value={description}
-        />
-        <div className="btn btn-primary btn-lg" onClick={addList}>
-          Add List
-        </div>
-      </form>
+    <div>
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Add List</Modal.Title>
+        </Modal.Header>
+        <Modal.Body
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div className="addToDoList">
+            <form onChange={change_data}>
+              Topic:{" "}
+              <input
+                type="text"
+                id="topic"
+                className="form-control"
+                value={topic}
+              />
+              Description:{" "}
+              <input
+                type="text"
+                id="description"
+                className="form-control"
+                value={description}
+              />
+              {/* <div className="btn btn-primary btn-lg"></div> */}
+            </form>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={addList}>Add List</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

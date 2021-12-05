@@ -11,12 +11,13 @@ import { useNavigate } from "react-router-dom";
 const ToDO = () => {
   const [lists, setLists] = useState({});
   const [user, setUser] = useContext(LogedUser);
+  const [showToDo, setShowToDo] = useState(false);
   const { id } = useParams();
   let navigate = useNavigate();
 
   const setValueOfList = (list) => {
-    console.log(list, "updating");
     setLists({ ...list });
+    setShowToDo(false);
   };
   useEffect(() => {
     getListFromId(id).then((data) => {
@@ -32,23 +33,49 @@ const ToDO = () => {
   return (
     <div>
       <h1>{lists.title}</h1>
-      <AddToDo id={id} setValueOfList={setValueOfList} />
+      <AddToDo
+        id={id}
+        setValueOfList={setValueOfList}
+        show={showToDo}
+        onHide={() => setShowToDo(false)}
+      />
 
       <br />
       <br />
       <br />
-      {lists.listItems &&
-        lists.listItems.map((item, index) => {
-          return (
-            <div key={index}>
-              <ToDoListBox
-                data={item}
-                id={id}
-                setValueOfList={setValueOfList}
-              />
-            </div>
-          );
-        })}
+      <div
+        className="btn btn-primary"
+        onClick={() => {
+          setShowToDo(true);
+        }}
+      >
+        Add New Todo Item
+      </div>
+
+      {lists.listItems && lists.listItems.length > 0 ? (
+        <>
+          {lists.listItems.map((item, index) => {
+            return (
+              <div key={index}>
+                <ToDoListBox
+                  data={item}
+                  id={id}
+                  setValueOfList={setValueOfList}
+                />
+              </div>
+            );
+          })}
+        </>
+      ) : (
+        <h6
+          style={{
+            marginTop: "50px",
+          }}
+        >
+          {" "}
+          No todo items{" "}
+        </h6>
+      )}
     </div>
   );
 };

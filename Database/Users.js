@@ -14,7 +14,7 @@ const User = new mongoose.Schema({
   },
   idConfirm: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 
