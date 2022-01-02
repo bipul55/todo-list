@@ -1,13 +1,10 @@
 .main {
   height: 100vh;
   width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #f8f8f8;
   .wrapper {
     width: 50%;
     height: 70%;
-
     .top {
       background-color: #3fa6fa;
       height: 10%;

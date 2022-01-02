@@ -10,7 +10,7 @@ const { NewList } = require("./Rest/NewList");
 const { AddNewToDo } = require("./Rest/AddNewToDo");
 const { changeToDoToDone } = require("./Rest/ChangeToDoToDone");
 const { changeToDoToPending } = require("./Rest/changeToDoToPending");
-
+const { deleteListItem } = require("./Rest/deleteListItem");
 const User = require("./Database/Users");
 const Lists = require("./Database/Lists");
 
@@ -37,15 +37,12 @@ app.use(express.static(path.join(__dirname, "./client/build")));
 
 // login API
 app.post("/login", (req, res) => {
-  console.log(req.body);
   Login(req, res).then((data) => {
-    console.log(data);
     res.json(data);
   });
 });
 // register API
 app.post("/register", (req, res) => {
-  console.log("register", req.body);
   Register(req, res).then((data) => {
     res.json(data);
   });
@@ -84,12 +81,16 @@ app.post("/changeToDoToPending", async (req, res) => {
     res.json(data);
   });
 });
-
+// API to delete list item
+app.post("/deleteListItem", async (req, res) => {
+  deleteListItem(req, res).then((data) => {
+    res.json(data);
+  });
+});
 // API to verify the user email
 app.get("/verifyMail/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    console.log("id", id);
     const u = await User.updateOne({ _id: id }, { $set: { idConfirm: true } });
     return res.redirect(process.env.url);
   } catch (err) {

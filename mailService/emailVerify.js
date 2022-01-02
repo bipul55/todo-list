@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const sendMail_register = async function (mail, id) {
-  console.log(mail, id, "mail and id");
   const url = `${process.env.url}verifyMail/${id}`;
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({

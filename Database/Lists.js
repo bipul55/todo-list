@@ -22,6 +22,10 @@ const Lists = new mongoose.Schema({
         type: String,
         default: "pending",
       },
+      dueDate: {
+        type: Date,
+        required: true,
+      },
     },
   ],
 });

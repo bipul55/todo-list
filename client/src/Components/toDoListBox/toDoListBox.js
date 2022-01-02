@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 import "./toDoListBox.scss";
 import { changeToDoToDone } from "../../Api/changeToDoToDone";
 import { changeToDoToPending } from "../../Api/changeToDoToPending";
-
 const ToDoListBox = (props) => {
   const changeToDone = () => {
-    console.log("clicking");
     changeToDoToDone(props.id, props.data._id).then((data) => {
       props.setValueOfList(data);
     });
   };
   const changeToPending = () => {
-    console.log("here");
     changeToDoToPending(props.id, props.data._id).then((data) => {
       props.setValueOfList(data);
     });

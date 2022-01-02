@@ -1,7 +1,6 @@
 const Lists = require("../Database/Lists");
 
 const NewList = (req, res) => {
-  console.log(req.body);
   let x = new Promise(async (resolve, reject) => {
     const list = new Lists({
       email: req.body.email,

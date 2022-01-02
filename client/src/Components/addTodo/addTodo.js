@@ -1,25 +1,33 @@
-import react, { useState, useContext } from "react";
+import react, { useState, useContext, useEffect, useCallback } from "react";
 import "./addTodo.scss";
 import { LogedUser } from "../../App";
 import { addNewToDoInList } from "../../Api/addNewToDoInList";
 import { Modal, Button } from "react-bootstrap";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const AddToDo = (props) => {
   const [toDo, setToDo] = useState("");
   const [user, setUser] = useContext(LogedUser);
+  const [date, setDate] = useState(null);
 
-  const addTodo = () => {
+  const addTodo = useCallback(() => {
     if (toDo != "") {
-      addNewToDoInList(props.id, toDo)
+      addNewToDoInList(props.id, toDo, date)
         .then((data) => {
-          console.log(data);
           props.setValueOfList(data);
         })
         .catch((err) => {
           console.log(err);
         });
     }
+  }, [toDo, date]);
+  const onChangeDate = (e) => {
+    setDate(e);
   };
+  useEffect(() => {
+    const d = new Date();
+    setDate(d);
+  }, []);
   return (
     <div>
       <Modal
@@ -39,7 +47,7 @@ const AddToDo = (props) => {
           }}
         >
           <div className="addToDo">
-            To Do:{" "}
+            To Do:
             <input
               type="text"
               id="to_do"
@@ -49,6 +57,9 @@ const AddToDo = (props) => {
                 setToDo(e.target.value);
               }}
             />
+            <br />
+            <>Due Date</>
+            <DatePicker selected={date} onChange={onChangeDate} />
           </div>
         </Modal.Body>
         <Modal.Footer>

@@ -20,18 +20,22 @@ const AddList = (props) => {
     }
   };
   const addList = () => {
-    addNewList(topic, description, user.email)
-      .then((data) => {
-        if (data.list) {
-          props.set_list(data.list);
-        }
-        if (data.error) {
-          window.alert(data.err);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (topic.length > 0 && description.length > 0) {
+      addNewList(topic, description, user.email)
+        .then((data) => {
+          if (data.list) {
+            props.set_list(data.list);
+          }
+          if (data.error) {
+            window.alert(data.err);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      alert("Enter all the parameters");
+    }
   };
   return (
     <div>

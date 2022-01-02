@@ -18,7 +18,7 @@ const Main = () => {
 
   useEffect(() => {
     getAllTheLists(user.email).then((data) => {
-      setLists([...data]);
+      setLists([...data.reverse()]);
     });
   }, []);
   useEffect(() => {
@@ -27,7 +27,7 @@ const Main = () => {
     }
   }, [user]);
   return (
-    <div>
+    <div className="main">
       <h1>{user.name}</h1>
       <div
         className="btn btn-dark btn-lg"
@@ -42,7 +42,6 @@ const Main = () => {
       </div>
       <AddList
         set_list={(list) => {
-          console.log(list);
           var temp = lists;
           temp.push(list);
           setLists([...temp]);
@@ -68,10 +67,10 @@ const Main = () => {
         }}
       >
         {lists.length > 0 ? (
-          <div>
+          <div className="row">
             {lists.map((list, index) => {
               return (
-                <div key={index}>
+                <div key={index} className="col-lg-4">
                   <ListBox data={list} />
                 </div>
               );
